@@ -17,9 +17,10 @@ public class TelaPrincipal extends JFrame {
     public TelaPrincipal() {
         setTitle("SysCad - Cadastro de Produtos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 400);
+        setSize(500, 430);
+        setResizable(false);
         setLocationRelativeTo(null);
-
+ 
         montarTela();
     }
 
@@ -29,51 +30,70 @@ public class TelaPrincipal extends JFrame {
      */
     private void montarTela() {
         setLayout(new BorderLayout());
-
+ 
         add(criarTitulo(), BorderLayout.NORTH);
         add(criarPainelFormulario(), BorderLayout.CENTER);
         add(criarPainelBotoes(), BorderLayout.SOUTH);
+
     }
 
     private JLabel criarTitulo() {
-        JLabel lblTitulo = new JLabel("Cadastro de Produtos", SwingConstants.CENTER);
-        return lblTitulo;
+        return new JLabel("Cadastro de Produtos", SwingConstants.CENTER);
     }
 
     private JPanel criarPainelFormulario() {
-        JPanel painelFormulario = new JPanel(new GridLayout(4, 2, 10, 10));
-
+        JPanel painelFormulario = new JPanel();
+        painelFormulario.setLayout(null);
+ 
         txtCodigo = new JTextField();
         txtNome = new JTextField();
         txtPreco = new JTextField();
         txtQuantidade = new JTextField();
-
-        painelFormulario.add(new JLabel("Código:"));
+ 
+        int y = Y_INICIAL;
+ 
+        JLabel lblCodigo = new JLabel("Código:");
+        lblCodigo.setBounds(MARGEM_ESQUERDA, y, LARGURA_LABEL, ALTURA_CAMPO);
+        txtCodigo.setBounds(X_CAMPO, y, LARGURA_CAMPO_PADRAO, ALTURA_CAMPO);
+        y += ESPACAMENTO_LINHA;
+ 
+        JLabel lblNome = new JLabel("Nome:");
+        lblNome.setBounds(MARGEM_ESQUERDA, y, LARGURA_LABEL, ALTURA_CAMPO);
+        txtNome.setBounds(X_CAMPO, y, LARGURA_CAMPO_NOME, ALTURA_CAMPO);
+        y += ESPACAMENTO_LINHA;
+ 
+        JLabel lblPreco = new JLabel("Preço:");
+        lblPreco.setBounds(MARGEM_ESQUERDA, y, LARGURA_LABEL, ALTURA_CAMPO);
+        txtPreco.setBounds(X_CAMPO, y, LARGURA_CAMPO_PADRAO, ALTURA_CAMPO);
+        y += ESPACAMENTO_LINHA;
+ 
+        JLabel lblQuantidade = new JLabel("Quantidade:");
+        lblQuantidade.setBounds(MARGEM_ESQUERDA, y, LARGURA_LABEL, ALTURA_CAMPO);
+        txtQuantidade.setBounds(X_CAMPO, y, LARGURA_CAMPO_PADRAO, ALTURA_CAMPO);
+ 
+        painelFormulario.add(lblCodigo);
         painelFormulario.add(txtCodigo);
-
-        painelFormulario.add(new JLabel("Nome:"));
+        painelFormulario.add(lblNome);
         painelFormulario.add(txtNome);
-
-        painelFormulario.add(new JLabel("Preço:"));
+        painelFormulario.add(lblPreco);
         painelFormulario.add(txtPreco);
-
-        painelFormulario.add(new JLabel("Quantidade:"));
+        painelFormulario.add(lblQuantidade);
         painelFormulario.add(txtQuantidade);
-
+ 
         return painelFormulario;
     }
 
     private JPanel criarPainelBotoes() {
         JPanel painelBotoes = new JPanel(new FlowLayout());
-
+ 
         btnSalvar = new JButton("Salvar");
         btnLimpar = new JButton("Limpar");
         btnSair = new JButton("Sair");
-
+ 
         painelBotoes.add(btnSalvar);
         painelBotoes.add(btnLimpar);
         painelBotoes.add(btnSair);
-
+ 
         // TODO (próxima aula - Tratamento de Eventos):
         // btnSalvar.addActionListener(...);
         // btnLimpar.addActionListener(...);
