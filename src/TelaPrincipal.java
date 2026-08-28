@@ -14,6 +14,16 @@ public class TelaPrincipal extends JFrame {
     private JButton btnLimpar;
     private JButton btnSair;
 
+    private static final int MARGEM_ESQUERDA = 20;
+    private static final int LARGURA_LABEL = 90;
+    private static final int LARGURA_CAMPO_PADRAO = 200;
+    private static final int LARGURA_CAMPO_NOME = 320;
+    private static final int ALTURA_CAMPO = 25;
+    private static final int Y_INICIAL = 20;
+    private static final int ESPACAMENTO_LINHA = 40;
+    private static final int X_CAMPO = MARGEM_ESQUERDA + LARGURA_LABEL + 10;
+
+
     public TelaPrincipal() {
         setTitle("SysCad - Cadastro de Produtos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,7 +107,9 @@ public class TelaPrincipal extends JFrame {
         // TODO (próxima aula - Tratamento de Eventos):
         // btnSalvar.addActionListener(...);
         // btnLimpar.addActionListener(...);
-        // btnSair.addActionListener(...);
+        btnSair.addActionListener(
+            e -> System.exit(0)
+        );
 
         return painelBotoes;
     }
