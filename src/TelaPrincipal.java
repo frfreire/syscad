@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.ArrayList;
+import modelo.Produto;
 
 public class TelaPrincipal extends JFrame {
 
@@ -23,6 +26,7 @@ public class TelaPrincipal extends JFrame {
     private static final int ESPACAMENTO_LINHA = 40;
     private static final int X_CAMPO = MARGEM_ESQUERDA + LARGURA_LABEL + 10;
 
+    private List<Produto> produtos;
 
     public TelaPrincipal() {
         setTitle("SysCad - Cadastro de Produtos");
@@ -104,14 +108,60 @@ public class TelaPrincipal extends JFrame {
         painelBotoes.add(btnLimpar);
         painelBotoes.add(btnSair);
  
-        // TODO (próxima aula - Tratamento de Eventos):
-        // btnSalvar.addActionListener(...);
-        // btnLimpar.addActionListener(...);
+        btnSalvar.addActionListener(
+            e -> salvar()
+        );
+
+        btnLimpar.addActionListener(
+            e -> limparCampos()
+        );
+
         btnSair.addActionListener(
             e -> System.exit(0)
         );
 
         return painelBotoes;
+    }
+
+    public void limparCampos(){
+        txtCodigo.setText("");
+        txtNome.setText("");
+        txtPreco.setText("");
+        txtQuantidade.setText("");
+    }
+
+    public void salvar(){
+
+        this.produtos = new ArrayList<>();
+
+        String codigo = txtCodigo.getText().trim();
+        String nome = txtNome.getText().trim();
+        String campoPreco = txtPreco.getText().trim();
+        String campoQuantidade = txtQuantidade.getText().trim();
+
+        if(codigo.isEmpty() || nome.isEmpty()
+            || campoPreco.isEmpty() || campoQuantidade.isEmpty()){
+        
+            JOptionPane.showMessageDialog(this,
+                "Preencha todos os campos"
+            );
+            return;
+        }
+
+        try{
+            double preco = Double.parseDouble(campoPreco);
+            int quantidade = Integer.parseInt(campoQuantidade);
+
+            produtos.add(new Produto(codigo, nome, preco, quantidade));
+
+            JOptionPane.showMessageDialog(this, "Produto salvo");
+
+            this.limparCampos();
+
+        } catch(NumberFormatException ex){
+
+            JOptionPane.showMessageDialog(this, "Preço e quantidade devem ser números");
+        }
     }
 
     public static void main(String[] args) {
