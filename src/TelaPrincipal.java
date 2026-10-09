@@ -1,12 +1,11 @@
-package syscad;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.SQLException;
 
-import syscad.dao.ProdutoDAO;
-import syscad.modelo.Produto;
+import dao.ProdutoDAO;
+import modelo.Produto;
 
 /**
  * SysCad - Sistema de Cadastro de Produtos

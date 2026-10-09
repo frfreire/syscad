@@ -1,4 +1,4 @@
-package syscad.modelo;
+package modelo;
 
 /**
  * SysCad - Modelo de dados

@@ -1,4 +1,4 @@
-package syscad.awt;
+package awt;
 
 import java.awt.*;
 
