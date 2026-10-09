@@ -1,0 +1,36 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: syscad-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: sua_senha_aqui
+      MYSQL_DATABASE: syscad_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - syscad_mysql_data:/var/lib/mysql
+      - ./criar_banco.sql:/docker-entrypoint-initdb.d/01-criar_banco.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-psua_senha_aqui"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: syscad-phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: sua_senha_aqui
+    ports:
+      - "8080:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  syscad_mysql_data:
